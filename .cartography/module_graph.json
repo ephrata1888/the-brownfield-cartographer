@@ -1,0 +1,621 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {
+    "circular_dependencies": []
+  },
+  "nodes": [
+    {
+      "id": ".pre-commit-config.yaml",
+      "path": ".pre-commit-config.yaml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "dbt_project.yml",
+      "path": "dbt_project.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "package-lock.yml",
+      "path": "package-lock.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "packages.yml",
+      "path": "packages.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "Taskfile.yml",
+      "path": "Taskfile.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "macros/cents_to_dollars.sql",
+      "path": "macros/cents_to_dollars.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "macros/generate_schema_name.sql",
+      "path": "macros/generate_schema_name.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/customers.sql",
+      "path": "models/marts/customers.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [
+        "orders",
+        "stg_customers"
+      ],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.06164408076951454,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/customers.yml",
+      "path": "models/marts/customers.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/locations.sql",
+      "path": "models/marts/locations.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [
+        "stg_locations"
+      ],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.042237550641150326,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/locations.yml",
+      "path": "models/marts/locations.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/metricflow_time_spine.sql",
+      "path": "models/marts/metricflow_time_spine.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/orders.sql",
+      "path": "models/marts/orders.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [
+        "order_items",
+        "stg_orders"
+      ],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.05194081570533243,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/orders.yml",
+      "path": "models/marts/orders.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/order_items.sql",
+      "path": "models/marts/order_items.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [
+        "stg_order_items",
+        "stg_orders",
+        "stg_products",
+        "stg_supplies"
+      ],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.07134734583369665,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/order_items.yml",
+      "path": "models/marts/order_items.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/products.sql",
+      "path": "models/marts/products.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [
+        "stg_products"
+      ],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.03253428557696821,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/products.yml",
+      "path": "models/marts/products.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/supplies.sql",
+      "path": "models/marts/supplies.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [
+        "stg_supplies"
+      ],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.03253428557696821,
+      "metadata": {}
+    },
+    {
+      "id": "models/marts/supplies.yml",
+      "path": "models/marts/supplies.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_customers.sql",
+      "path": "models/staging/stg_customers.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [
+        "ecom.raw_customers"
+      ],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_customers.yml",
+      "path": "models/staging/stg_customers.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_locations.sql",
+      "path": "models/staging/stg_locations.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [
+        "ecom.raw_stores"
+      ],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_locations.yml",
+      "path": "models/staging/stg_locations.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_orders.sql",
+      "path": "models/staging/stg_orders.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [
+        "ecom.raw_orders"
+      ],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_orders.yml",
+      "path": "models/staging/stg_orders.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_order_items.sql",
+      "path": "models/staging/stg_order_items.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [
+        "ecom.raw_items"
+      ],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_order_items.yml",
+      "path": "models/staging/stg_order_items.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_products.sql",
+      "path": "models/staging/stg_products.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [
+        "ecom.raw_products"
+      ],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_products.yml",
+      "path": "models/staging/stg_products.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_supplies.sql",
+      "path": "models/staging/stg_supplies.sql",
+      "language": "sql",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [
+        "ecom.raw_supplies"
+      ],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/stg_supplies.yml",
+      "path": "models/staging/stg_supplies.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": "models/staging/__sources.yml",
+      "path": "models/staging/__sources.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": ".github/workflows/cd_prod.yml",
+      "path": ".github/workflows/cd_prod.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": ".github/workflows/cd_staging.yml",
+      "path": ".github/workflows/cd_staging.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": ".github/workflows/ci.yml",
+      "path": ".github/workflows/ci.yml",
+      "language": "yaml",
+      "imports": [],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    },
+    {
+      "id": ".github/workflows/scripts/dbt_cloud_run_job.py",
+      "path": ".github/workflows/scripts/dbt_cloud_run_job.py",
+      "language": "python",
+      "imports": [
+        "os",
+        "requests",
+        "time"
+      ],
+      "sql_refs": [],
+      "sql_sources": [],
+      "public_functions": [
+        "get_run_status",
+        "main",
+        "run_job"
+      ],
+      "public_classes": [],
+      "change_count_30d": 0,
+      "is_high_velocity": false,
+      "hub_score": 0.02283102051278611,
+      "metadata": {}
+    }
+  ],
+  "links": [
+    {
+      "type": "IMPORTS",
+      "source": "models/marts/orders.yml",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/marts/order_items.yml",
+      "target": "models/marts/orders.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/staging/stg_customers.yml",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/staging/stg_locations.yml",
+      "target": "models/marts/locations.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/staging/stg_orders.yml",
+      "target": "models/marts/orders.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/staging/stg_orders.yml",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/staging/stg_order_items.yml",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/staging/stg_products.yml",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/staging/stg_products.yml",
+      "target": "models/marts/products.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/staging/stg_supplies.yml",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "type": "IMPORTS",
+      "source": "models/staging/stg_supplies.yml",
+      "target": "models/marts/supplies.sql"
+    }
+  ]
+}

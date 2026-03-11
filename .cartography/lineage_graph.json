@@ -1,0 +1,320 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "file",
+      "id": "models/marts/customers.sql"
+    },
+    {
+      "type": "table",
+      "id": "orders"
+    },
+    {
+      "type": "table",
+      "id": "customers"
+    },
+    {
+      "type": "table",
+      "id": "stg_customers"
+    },
+    {
+      "type": "table",
+      "id": "joined"
+    },
+    {
+      "type": "table",
+      "id": "customer_orders_summary"
+    },
+    {
+      "type": "file",
+      "id": "models/marts/locations.sql"
+    },
+    {
+      "type": "table",
+      "id": "locations"
+    },
+    {
+      "type": "table",
+      "id": "stg_locations"
+    },
+    {
+      "type": "file",
+      "id": "models/marts/metricflow_time_spine.sql"
+    },
+    {
+      "type": "table",
+      "id": "cast_to_date"
+    },
+    {
+      "type": "table",
+      "id": "days"
+    },
+    {
+      "type": "file",
+      "id": "models/marts/orders.sql"
+    },
+    {
+      "type": "table",
+      "id": "stg_orders"
+    },
+    {
+      "type": "table",
+      "id": "order_items_summary"
+    },
+    {
+      "type": "table",
+      "id": "order_items"
+    },
+    {
+      "type": "table",
+      "id": "customer_order_count"
+    },
+    {
+      "type": "table",
+      "id": "compute_booleans"
+    },
+    {
+      "type": "file",
+      "id": "models/marts/order_items.sql"
+    },
+    {
+      "type": "table",
+      "id": "stg_supplies"
+    },
+    {
+      "type": "table",
+      "id": "products"
+    },
+    {
+      "type": "table",
+      "id": "stg_order_items"
+    },
+    {
+      "type": "table",
+      "id": "supplies"
+    },
+    {
+      "type": "table",
+      "id": "order_supplies_summary"
+    },
+    {
+      "type": "table",
+      "id": "stg_products"
+    },
+    {
+      "type": "file",
+      "id": "models/marts/products.sql"
+    },
+    {
+      "type": "file",
+      "id": "models/marts/supplies.sql"
+    },
+    {
+      "type": "dataset",
+      "id": "source:ecom"
+    },
+    {
+      "type": "dataset",
+      "id": "source:ecom.raw_orders"
+    },
+    {
+      "type": "dataset",
+      "id": "source:ecom.raw_supplies"
+    },
+    {
+      "type": "dataset",
+      "id": "source:ecom.raw_items"
+    },
+    {
+      "type": "dataset",
+      "id": "source:ecom.raw_customers"
+    },
+    {
+      "type": "dataset",
+      "id": "source:ecom.raw_stores"
+    },
+    {
+      "type": "dataset",
+      "id": "source:ecom.raw_products"
+    }
+  ],
+  "links": [
+    {
+      "kind": "sql_dep",
+      "source": "orders",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "orders",
+      "target": "models/marts/orders.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "orders",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "customers",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_customers",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "joined",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "joined",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "customer_orders_summary",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "locations",
+      "target": "models/marts/locations.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_locations",
+      "target": "models/marts/locations.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "cast_to_date",
+      "target": "models/marts/metricflow_time_spine.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "days",
+      "target": "models/marts/metricflow_time_spine.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_orders",
+      "target": "models/marts/orders.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_orders",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "order_items_summary",
+      "target": "models/marts/orders.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "order_items",
+      "target": "models/marts/orders.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "order_items",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "customer_order_count",
+      "target": "models/marts/orders.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "compute_booleans",
+      "target": "models/marts/orders.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_supplies",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_supplies",
+      "target": "models/marts/supplies.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "products",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "products",
+      "target": "models/marts/products.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_order_items",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "supplies",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "supplies",
+      "target": "models/marts/supplies.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "order_supplies_summary",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_products",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_products",
+      "target": "models/marts/products.sql"
+    },
+    {
+      "kind": "config",
+      "source": "source:ecom",
+      "target": "source:ecom.raw_orders"
+    },
+    {
+      "kind": "config",
+      "source": "source:ecom",
+      "target": "source:ecom.raw_supplies"
+    },
+    {
+      "kind": "config",
+      "source": "source:ecom",
+      "target": "source:ecom.raw_items"
+    },
+    {
+      "kind": "config",
+      "source": "source:ecom",
+      "target": "source:ecom.raw_customers"
+    },
+    {
+      "kind": "config",
+      "source": "source:ecom",
+      "target": "source:ecom.raw_stores"
+    },
+    {
+      "kind": "config",
+      "source": "source:ecom",
+      "target": "source:ecom.raw_products"
+    }
+  ]
+}
