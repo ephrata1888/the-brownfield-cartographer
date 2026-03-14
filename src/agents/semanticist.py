@@ -54,11 +54,10 @@ class ContextWindowBudget:
         return max(0, self.max_tokens_flash - self.used_flash)
 
 
-# Preferred Gemini model candidates for the Gemini v1 API, ordered by preference.
+# Preferred Gemini model IDs for the Gemini v1 API (no "models/" prefix in API calls).
 MODELS: List[str] = [
-    "models/gemini-2.0-flash",
-    "models/gemini-1.5-flash",
-    "models/gemini-1.5-pro",
+    "gemini-2.0-flash",
+    "gemini-1.5-flash",
 ]
 
 
@@ -118,24 +117,46 @@ class LLMClient:
             http_options={"api_version": "v1"},
         )
 
-        def _call(model_name: str) -> str:
-            # Embed the system instructions into the prompt body so the API
-            # only receives a single `contents` string, which is compatible
-            # across SDK versions.
-            combined_prompt = f"INSTRUCTIONS: {system_prompt}\n\nTASK: {user_prompt}"
-            response = client.models.generate_content(
-                model=model_name,
-                contents=combined_prompt,
-            )
-            text_out = getattr(response, "text", None)
-            if not text_out:
-                text_out = str(response)
-            return text_out
+        def _call_with_system(model_name: str) -> str:
+            """
+            Primary call-path: use Gemini v1 `system_instruction` plus a
+            user-level `contents` payload. If this fails (e.g. 400 due to
+            incompatible fields), we fall back to a single combined prompt.
+            Model ID must not include the "models/" prefix (avoids 404s).
+            """
+            model_id = model_name.replace("models/", "")
+            try:
+                response = client.models.generate_content(
+                    model=model_id,
+                    system_instruction=system_prompt,
+                    contents=user_prompt,
+                )
+                text_out = getattr(response, "text", None)
+                if not text_out:
+                    text_out = str(response)
+                return text_out
+            except Exception as e:
+                # Nuclear fallback: fold system + user into a single prompt
+                # string to maximize compatibility with any v1 deployment.
+                self.trace.log_error(
+                    stage=f"semanticist.{stage}.system_instruction_failed",
+                    path=path,
+                    error=e,
+                )
+                combined_prompt = f"INSTRUCTIONS: {system_prompt}\n\nTASK: {user_prompt}"
+                response = client.models.generate_content(
+                    model=model_id,
+                    contents=combined_prompt,
+                )
+                text_out = getattr(response, "text", None)
+                if not text_out:
+                    text_out = str(response)
+                return text_out
 
         last_error: Exception | None = None
         for model_name in models_to_try:
             try:
-                return _call(model_name)
+                return _call_with_system(model_name)
             except Exception as e:
                 last_error = e
                 continue
@@ -305,8 +326,8 @@ class Semanticist:
 
         user_prompt = f"STRUCTURAL:\n{structural_view}\n\nLINEAGE:\n{lineage_view}"
 
-        # Final synthesis → pro-tier model (hint; LLMClient maintains its own fallback list)
-        model_name = MODELS[-1]
+        # Final synthesis (same candidate list as purpose/cluster; no pro/beta models)
+        model_name = MODELS[0]
         _raw = self.llm.generate(
             model=model_name,
             stage="day_one_questions",

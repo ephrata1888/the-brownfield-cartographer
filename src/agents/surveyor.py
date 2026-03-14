@@ -107,7 +107,7 @@ class Surveyor:
         node.sql_refs = sorted(set(_REF_RE.findall(source)))
         node.sql_sources = sorted({f"{a}.{b}" for (a, b) in _SOURCE_RE.findall(source)})
 
-    def extract_git_velocity(self, path: str | Path, *, days: int = 30) -> int:
+    def extract_git_velocity(self, path: str | Path, *, days: int = 90) -> int:
         """
         Returns the number of commits touching <path> within the last <days>.
         """
@@ -139,7 +139,7 @@ class Surveyor:
             self.trace.log_error(stage="extract_git_velocity", path=p, error=e, extra={"days": days})
             return 0
 
-    def apply_velocity_flags(self, nodes: list[ModuleNode], *, days: int = 30) -> list[ModuleNode]:
+    def apply_velocity_flags(self, nodes: list[ModuleNode], *, days: int = 90) -> list[ModuleNode]:
         counts: list[tuple[int, ModuleNode]] = []
         for n in nodes:
             cc = self.extract_git_velocity(n.path, days=days)

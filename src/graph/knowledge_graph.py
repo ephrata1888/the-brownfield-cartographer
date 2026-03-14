@@ -90,7 +90,7 @@ class KnowledgeGraph:
         return None
 
     def _run_algorithms(self) -> None:
-        # PageRank hub score
+        # PageRank hub score (architectural hubs)
         if self.graph.number_of_nodes() > 0 and self.graph.number_of_edges() > 0:
             pr = nx.pagerank(self.graph)
         else:
@@ -110,4 +110,13 @@ class KnowledgeGraph:
                     md["circular_dependency"] = True
 
         self.graph.graph["circular_dependencies"] = circular_components
+
+        # Dead code heuristic: modules with no incoming or outgoing edges and
+        # no recent git activity (change_count_30d==0) are flagged as dead.
+        for node_id, data in self.graph.nodes(data=True):
+            deg_in = self.graph.in_degree(node_id)
+            deg_out = self.graph.out_degree(node_id)
+            is_isolated = deg_in == 0 and deg_out == 0
+            change_count = int(data.get("change_count_30d", 0))
+            data["is_dead_code"] = bool(is_isolated and change_count == 0)
 

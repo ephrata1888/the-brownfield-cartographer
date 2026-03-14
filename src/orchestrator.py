@@ -23,9 +23,10 @@ from src.models.module_node import ModuleNode
 from src.models.semantic import DayOneReport
 from src.utils.trace import TraceLogger
 
-
-def _cartography_dir(repo_root: Path) -> Path:
-    return Path.cwd()/ ".cartography"
+# Brownfield Cartographer project root (directory containing `src/`). All
+# pipeline artifacts (`.cartography/`) are written here so analyzing e.g.
+# `jaffle-shop/` still lands outputs in the main workspace.
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 class CartographyOrchestrator:
@@ -37,7 +38,9 @@ class CartographyOrchestrator:
 
     def __init__(self, repo_root: Path) -> None:
         self.repo_root = repo_root.resolve()
-        self.trace = TraceLogger(self.repo_root / "cartography_trace.jsonl")
+        self.cartography_dir = PROJECT_ROOT / ".cartography"
+        self.cartography_dir.mkdir(parents=True, exist_ok=True)
+        self.trace = TraceLogger(self.cartography_dir / "cartography_trace.jsonl")
 
     # ------------------------------------------------------------------ #
     # Public API
@@ -47,10 +50,9 @@ class CartographyOrchestrator:
         """
         Run the Surveyor to produce the structural graph and PageRank.
         If incremental=True and .cartography state exists, only update changed nodes (git diff).
-        Serializes to `.cartography/module_graph.json`.
+        Serializes to `<project_root>/.cartography/module_graph.json`.
         """
-        out_dir = _cartography_dir(self.repo_root)
-        out_dir.mkdir(parents=True, exist_ok=True)
+        out_dir = self.cartography_dir
         module_graph_path = out_dir / "module_graph.json"
 
         router = LanguageRouter()
@@ -97,8 +99,7 @@ class CartographyOrchestrator:
         hydrologist = Hydrologist(repo_root=self.repo_root, trace=self.trace)
         lg = hydrologist.build_graph()
 
-        out_dir = _cartography_dir(self.repo_root)
-        out_dir.mkdir(parents=True, exist_ok=True)
+        out_dir = self.cartography_dir
         out_path = out_dir / "lineage_graph.json"
 
         data = json_graph.node_link_data(lg, edges="links")
@@ -134,8 +135,7 @@ class CartographyOrchestrator:
         _clusters = semanticist.cluster_into_domains(purposes)
         report = semanticist.answer_day_one_questions()
 
-        out_dir = _cartography_dir(self.repo_root)
-        out_dir.mkdir(parents=True, exist_ok=True)
+        out_dir = self.cartography_dir
 
         # Persist enriched semantic annotations back to the module graph so that
         # subsequent runs (or standalone Archivist invocations) can read
@@ -166,8 +166,7 @@ class CartographyOrchestrator:
             evidence_source="static_analysis",
             confidence_score=1.0,
         )
-        out_dir = _cartography_dir(self.repo_root)
-        out_dir.mkdir(parents=True, exist_ok=True)
+        out_dir = self.cartography_dir
         archivist = Archivist(
             repo_root=self.repo_root,
             trace=self.trace,
@@ -184,16 +183,14 @@ class CartographyOrchestrator:
     # ------------------------------------------------------------------ #
 
     def _cartography_state_exists(self) -> bool:
-        d = _cartography_dir(self.repo_root)
-        return (d / "module_graph.json").exists()
+        return (self.cartography_dir / "module_graph.json").exists()
 
     def _get_changed_paths(self) -> Set[str]:
         """
         Return set of repo-relative paths (with forward slashes) that changed since last run.
         Uses git diff --name-only from last stored commit, or HEAD if no stored commit.
         """
-        out_dir = _cartography_dir(self.repo_root)
-        last_run = out_dir / "last_run_commit.txt"
+        last_run = self.cartography_dir / "last_run_commit.txt"
         ref = "HEAD"
         if last_run.exists():
             ref = last_run.read_text(encoding="utf-8").strip() or "HEAD"
@@ -224,9 +221,8 @@ class CartographyOrchestrator:
                 check=False,
             )
             if proc.returncode == 0 and proc.stdout.strip():
-                out_dir = _cartography_dir(self.repo_root)
-                out_dir.mkdir(parents=True, exist_ok=True)
-                (out_dir / "last_run_commit.txt").write_text(proc.stdout.strip(), encoding="utf-8")
+                self.cartography_dir.mkdir(parents=True, exist_ok=True)
+                (self.cartography_dir / "last_run_commit.txt").write_text(proc.stdout.strip(), encoding="utf-8")
         except Exception:
             pass
 

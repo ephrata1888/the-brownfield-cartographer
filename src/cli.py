@@ -15,6 +15,11 @@ if str(_ROOT) not in sys.path:
 
 from src.models.semantic import DayOneReport
 from src.orchestrator import CartographyOrchestrator
+from src.agents.hydrologist import Hydrologist
+from src.agents.navigator import Navigator
+from src.graph.knowledge_graph import KnowledgeGraph
+from src.graph.lineage_graph import LineageGraph
+from src.utils.trace import TraceLogger
 
 
 app = typer.Typer(add_completion=False)
@@ -55,8 +60,7 @@ def iter_repo_files(repo_root: Path) -> Iterable[Path]:
 def analyze(repo_path: str) -> None:
     """
     Full pipeline: structural + lineage + semantic + archivist.
-    Writes `.cartography/module_graph.json`, `.cartography/lineage_graph.json`,
-    `.cartography/CODEBASE.md`, and `.cartography/onboarding_brief.md`.
+    Writes artifacts under the project root `.cartography/` (not inside the analyzed repo).
     """
     repo_root = Path(repo_path).resolve()
     orchestrator = CartographyOrchestrator(repo_root=repo_root)
@@ -78,13 +82,13 @@ def analyze(repo_path: str) -> None:
     typer.echo(f"[Analyze] Total Nodes: {num_nodes}")
     typer.echo(f"[Analyze] Total Links: {num_links}")
     typer.echo(f"[Analyze] Top 3 Architectural Hubs: {top_hub_ids}")
-    typer.echo("[Analyze] Wrote .cartography/module_graph.json, lineage_graph.json, CODEBASE.md, onboarding_brief.md")
+    typer.echo(f"[Analyze] Wrote outputs to {_ROOT / '.cartography'}")
 
 
 @app.command()
 def lineage(repo_path: str) -> None:
     """
-    Build a data lineage graph and write `.cartography/lineage_graph.json`.
+    Build a data lineage graph; writes to project root `.cartography/lineage_graph.json`.
     """
     repo_root = Path(repo_path).resolve()
     orchestrator = CartographyOrchestrator(repo_root=repo_root)
@@ -101,7 +105,7 @@ def lineage(repo_path: str) -> None:
 def archive(repo_path: str) -> None:
     """
     Run structural + lineage (if needed), then Archivist.
-    Writes `.cartography/CODEBASE.md` and `.cartography/onboarding_brief.md`.
+    Writes project root `.cartography/CODEBASE.md` and `onboarding_brief.md`.
     """
     repo_root = Path(repo_path).resolve()
     orchestrator = CartographyOrchestrator(repo_root=repo_root)
@@ -109,7 +113,7 @@ def archive(repo_path: str) -> None:
     lg = orchestrator.run_lineage()
 
     # Optional: load day-one report for richer onboarding brief
-    day_one_path = repo_root / ".cartography" / "semantic_day_one_answers.json"
+    day_one_path = _ROOT / ".cartography" / "semantic_day_one_answers.json"
     day_one_report = None
     if day_one_path.exists():
         try:
@@ -118,7 +122,75 @@ def archive(repo_path: str) -> None:
             pass
 
     codebase, brief = orchestrator.run_archivist(kg=kg, lg=lg, day_one_report=day_one_report, update=True)
-    typer.echo("[Archivist] CODEBASE.md and onboarding_brief.md written to .cartography/")
+    typer.echo(f"[Archivist] Wrote to {_ROOT / '.cartography'}")
+
+
+@app.command()
+def query(
+    repo_path: str,
+    tool: str = typer.Argument(
+        ...,
+        help="Navigator tool to run: one of [find_implementation, trace_lineage, blast_radius, explain_module]",
+    ),
+    param: str = typer.Argument(
+        ...,
+        help="Primary parameter for the selected tool (concept, dataset, or module path).",
+    ),
+    direction: str = typer.Option(
+        "downstream",
+        "--direction",
+        "-d",
+        help="For trace_lineage: 'upstream' or 'downstream'.",
+    ),
+) -> None:
+    """
+    Navigator mode: interactive read-only querying over the structural and
+    lineage graphs using the Navigator agent tools.
+
+    Tools:
+    - find_implementation <concept>
+    - trace_lineage <dataset> --direction [upstream|downstream]
+    - blast_radius <module_path>
+    - explain_module <module_path>
+    """
+    repo_root = Path(repo_path).resolve()
+
+    # Reuse existing artifacts when present to keep query mode fast; otherwise
+    # build fresh graphs.
+    orchestrator = CartographyOrchestrator(repo_root=repo_root)
+    cartography_dir = orchestrator.cartography_dir
+    module_graph_path = cartography_dir / "module_graph.json"
+    lineage_graph_path = cartography_dir / "lineage_graph.json"
+
+    if module_graph_path.exists():
+        data = json.loads(module_graph_path.read_text(encoding="utf-8"))
+        kg = KnowledgeGraph(graph=json_graph.node_link_graph(data, directed=True, multigraph=False))
+    else:
+        kg = orchestrator.run_structural(incremental=True)
+
+    if lineage_graph_path.exists():
+        data = json.loads(lineage_graph_path.read_text(encoding="utf-8"))
+        lg = LineageGraph(json_graph.node_link_graph(data, directed=True, multigraph=False))
+    else:
+        lg = orchestrator.run_lineage()
+
+    trace = TraceLogger(cartography_dir / "cartography_trace.jsonl")
+    hydrologist = Hydrologist(repo_root=repo_root, trace=trace, graph=lg)
+    navigator = Navigator(repo_root=repo_root, trace=trace, kg=kg, hydrologist=hydrologist)
+
+    if tool == "find_implementation":
+        result = navigator.find_implementation(concept=param)
+    elif tool == "trace_lineage":
+        dir_lit = "downstream" if direction not in {"upstream", "downstream"} else direction
+        result = navigator.trace_lineage(dataset=param, direction=dir_lit)  # type: ignore[arg-type]
+    elif tool == "blast_radius":
+        result = navigator.blast_radius(module_path=param)
+    elif tool == "explain_module":
+        result = navigator.explain_module(path=param)
+    else:
+        raise typer.BadParameter(f"Unknown Navigator tool: {tool}")
+
+    typer.echo(result.model_dump_json(indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":

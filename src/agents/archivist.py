@@ -13,6 +13,9 @@ from src.graph.lineage_graph import LineageGraph
 from src.models.semantic import DayOneReport
 from src.utils.trace import TraceLogger
 
+# Same project root as orchestrator: artifacts live under `<repo>/.cartography/`.
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+
 
 class Archivist:
     """
@@ -44,10 +47,10 @@ class Archivist:
             action="generate_CODEBASE_md",
             evidence_source="static_analysis",
             confidence_score=1.0,
-            path=output_path or self.repo_root / ".cartography" / "CODEBASE.md",
+            path=output_path or _PROJECT_ROOT / ".cartography" / "CODEBASE.md",
         )
 
-        out_dir = self.repo_root / ".cartography"
+        out_dir = _PROJECT_ROOT / ".cartography"
         out_dir.mkdir(parents=True, exist_ok=True)
         path = output_path or out_dir / "CODEBASE.md"
 
@@ -202,7 +205,7 @@ class Archivist:
             path=output_path,
         )
 
-        out_dir = self.repo_root / ".cartography"
+        out_dir = _PROJECT_ROOT / ".cartography"
         out_dir.mkdir(parents=True, exist_ok=True)
         path = output_path or out_dir / "onboarding_brief.md"
 

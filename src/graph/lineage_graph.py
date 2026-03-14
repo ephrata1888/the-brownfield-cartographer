@@ -19,6 +19,11 @@ class LineageGraph(nx.DiGraph):
 
     @classmethod
     def build(cls, repo_root: Path, trace: TraceLogger) -> "LineageGraph":
+        """
+        Build a lineage graph scoped strictly to the user-provided repository
+        root. We explicitly ignore virtualenvs, VCS metadata, cartography
+        artifacts, and common cache directories under the root.
+        """
         repo_root = repo_root.resolve()
         g = cls()
 
@@ -27,12 +32,26 @@ class LineageGraph(nx.DiGraph):
         sql_analyzer = SqlLineageAnalyzer(repo_root=repo_root, trace=trace)
         cfg_analyzer = ConfigLineageAnalyzer(repo_root=repo_root, trace=trace)
 
+        skip_dirs = {
+            ".git",
+            ".cartography",
+            ".venv",
+            "venv",
+            "node_modules",
+            "__pycache__",
+            ".mypy_cache",
+            ".pytest_cache",
+            ".ruff_cache",
+        }
+
         py_files: List[Path] = []
         sql_files: List[Path] = []
         yaml_files: List[Path] = []
 
         for p in repo_root.rglob("*"):
             if not p.is_file():
+                continue
+            if any(part in skip_dirs for part in p.parts):
                 continue
             suffix = p.suffix.lower()
             if suffix == ".py":
@@ -52,12 +71,22 @@ class LineageGraph(nx.DiGraph):
                 g.add_node(ds, type="dataset")
                 g.add_edge(res.file_id, ds, kind="writes")
 
-        # SQL lineage
+        # SQL lineage (including dbt-style model dependencies)
         for res in sql_analyzer.analyze_files(sql_files):
             g.add_node(res.file_id, type="file")
+            # Tables referenced by this SQL file
             for tbl in res.tables:
                 g.add_node(tbl, type="table")
                 g.add_edge(tbl, res.file_id, kind="sql_dep")
+
+            # dbt lineage: link upstream models (via ref()) to this model.
+            # We model dbt datasets using their logical model names (file stem).
+            if getattr(res, "dbt_parents", None):
+                current_model = Path(res.file_id).stem
+                g.add_node(current_model, type="dataset")
+                for parent in sorted(res.dbt_parents):
+                    g.add_node(parent, type="dataset")
+                    g.add_edge(parent, current_model, kind="dbt_dep")
 
         # Config lineage (Airflow + dbt YAML)
         for res in cfg_analyzer.analyze_py_files(py_files):

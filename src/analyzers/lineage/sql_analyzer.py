@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable, List, Optional, Set
 
@@ -12,12 +12,19 @@ from src.utils.trace import TraceLogger
 
 
 _REF_RE = re.compile(r"\{\{\s*ref\(\s*['\"]([^'\"]+)['\"]\s*\)\s*\}\}", re.IGNORECASE)
+_SOURCE_RE = re.compile(
+    r"\{\{\s*source\(\s*['\"]([^'\"]+)['\"]\s*,\s*['\"]([^'\"]+)['\"]\s*\)\s*\}\}",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
 class SqlLineageResult:
     file_id: str
     tables: Set[str]
+    # Logical dbt parents discovered via ref() calls; used by Hydrologist
+    # to stitch together model-to-model lineage.
+    dbt_parents: Set[str] = field(default_factory=set)
 
 
 class SqlLineageAnalyzer:
@@ -50,6 +57,9 @@ class SqlLineageAnalyzer:
             self.trace.log_error(stage="sql_lineage_read", path=path, error=e)
             return None
 
+        # Capture dbt parents before we mutate the SQL via preprocessing.
+        dbt_parents: Set[str] = set(_REF_RE.findall(sql_text))
+
         # Preprocess dbt {{ ref('...') }} into plain table names
         def _replace_ref(match: re.Match) -> str:
             model = match.group(1)
@@ -57,6 +67,14 @@ class SqlLineageAnalyzer:
             return model
 
         preprocessed = _REF_RE.sub(_replace_ref, sql_text)
+
+        # Convert dbt source() macros into schema.table-style identifiers so
+        # they are visible to sqlglot like regular tables.
+        def _replace_source(match: re.Match) -> str:
+            src_name, tbl_name = match.group(1), match.group(2)
+            return f"{src_name}.{tbl_name}"
+
+        preprocessed = _SOURCE_RE.sub(_replace_source, preprocessed)
 
         tree = None
         for dialect in self.DIALECTS:
@@ -94,7 +112,7 @@ class SqlLineageAnalyzer:
             self.trace.log_error(stage="sql_lineage_walk", path=path, error=e)
             return None
 
-        if not tables:
+        if not tables and not dbt_parents:
             return None
 
         try:
@@ -103,5 +121,5 @@ class SqlLineageAnalyzer:
             rel = Path(path.name)
         file_id = str(rel).replace("\\", "/")
 
-        return SqlLineageResult(file_id=file_id, tables=tables)
+        return SqlLineageResult(file_id=file_id, tables=tables, dbt_parents=dbt_parents)
 
