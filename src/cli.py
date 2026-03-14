@@ -13,6 +13,7 @@ _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
+from src.models.semantic import DayOneReport
 from src.orchestrator import CartographyOrchestrator
 
 
@@ -53,17 +54,20 @@ def iter_repo_files(repo_root: Path) -> Iterable[Path]:
 @app.command()
 def analyze(repo_path: str) -> None:
     """
-    Analyze a repository and write `.cartography/module_graph.json`.
+    Full pipeline: structural + lineage + semantic + archivist.
+    Writes `.cartography/module_graph.json`, `.cartography/lineage_graph.json`,
+    `.cartography/CODEBASE.md`, and `.cartography/onboarding_brief.md`.
     """
     repo_root = Path(repo_path).resolve()
     orchestrator = CartographyOrchestrator(repo_root=repo_root)
     kg = orchestrator.run_structural()
+    lg = orchestrator.run_lineage()
+    day_one_report = orchestrator.run_semantic(kg=kg, lg=lg)
+    codebase, brief = orchestrator.run_archivist(kg=kg, lg=lg, day_one_report=day_one_report, update=True)
 
-    # Console validation summary (unchanged)
+    # Console validation summary for quick sanity check.
     num_nodes = kg.graph.number_of_nodes()
     num_links = kg.graph.number_of_edges()
-
-    # Top 3 hubs by PageRank (already populated in KnowledgeGraph._run_algorithms)
     hubs = sorted(
         kg.graph.nodes(data=True),
         key=lambda t: float(t[1].get("hub_score", 0.0)),
@@ -71,9 +75,10 @@ def analyze(repo_path: str) -> None:
     )[:3]
     top_hub_ids = [node_id for node_id, _ in hubs]
 
-    typer.echo(f"Total Nodes: {num_nodes}")
-    typer.echo(f"Total Links: {num_links}")
-    typer.echo(f"Top 3 Architectural Hubs: {top_hub_ids}")
+    typer.echo(f"[Analyze] Total Nodes: {num_nodes}")
+    typer.echo(f"[Analyze] Total Links: {num_links}")
+    typer.echo(f"[Analyze] Top 3 Architectural Hubs: {top_hub_ids}")
+    typer.echo("[Analyze] Wrote .cartography/module_graph.json, lineage_graph.json, CODEBASE.md, onboarding_brief.md")
 
 
 @app.command()
@@ -91,7 +96,29 @@ def lineage(repo_path: str) -> None:
     typer.echo(f"[Lineage] Total Nodes: {num_nodes}")
     typer.echo(f"[Lineage] Total Links: {num_links}")
 
-    # Files are already serialized by the orchestrator; CLI only reports stats here.
+
+@app.command()
+def archive(repo_path: str) -> None:
+    """
+    Run structural + lineage (if needed), then Archivist.
+    Writes `.cartography/CODEBASE.md` and `.cartography/onboarding_brief.md`.
+    """
+    repo_root = Path(repo_path).resolve()
+    orchestrator = CartographyOrchestrator(repo_root=repo_root)
+    kg = orchestrator.run_structural(incremental=True)
+    lg = orchestrator.run_lineage()
+
+    # Optional: load day-one report for richer onboarding brief
+    day_one_path = repo_root / ".cartography" / "semantic_day_one_answers.json"
+    day_one_report = None
+    if day_one_path.exists():
+        try:
+            day_one_report = DayOneReport.model_validate_json(day_one_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+
+    codebase, brief = orchestrator.run_archivist(kg=kg, lg=lg, day_one_report=day_one_report, update=True)
+    typer.echo("[Archivist] CODEBASE.md and onboarding_brief.md written to .cartography/")
 
 
 if __name__ == "__main__":

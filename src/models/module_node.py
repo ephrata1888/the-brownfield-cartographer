@@ -29,6 +29,12 @@ class ModuleNode(BaseModel):
     hub_score: float | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
 
+    # Semanticist-enriched fields
+    purpose: str | None = None
+    documentation_drift: bool = False
+    drift_explanation: str | None = None
+    domain_cluster: str | None = None
+
     def stem(self) -> str:
         return Path(self.path).stem
 
