@@ -21,7 +21,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": "dbt_project.yml",
@@ -39,7 +40,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": "package-lock.yml",
@@ -57,7 +59,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": "packages.yml",
@@ -75,7 +78,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": "Taskfile.yml",
@@ -93,7 +97,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": "macros/cents_to_dollars.sql",
@@ -108,10 +113,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\macros\\cents_to_dollars.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\macros\\cents_to_dollars.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     },
     {
       "id": "macros/generate_schema_name.sql",
@@ -126,10 +132,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\macros\\generate_schema_name.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\macros\\generate_schema_name.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     },
     {
       "id": "models/marts/customers.sql",
@@ -147,10 +154,11 @@
       "is_high_velocity": false,
       "hub_score": 0.06164408076951454,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\customers.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\customers.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": false
     },
     {
       "id": "models/marts/customers.yml",
@@ -168,7 +176,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": "models/marts/locations.sql",
@@ -185,10 +194,11 @@
       "is_high_velocity": false,
       "hub_score": 0.042237550641150326,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\locations.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\locations.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": false
     },
     {
       "id": "models/marts/locations.yml",
@@ -206,7 +216,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": "models/marts/metricflow_time_spine.sql",
@@ -221,10 +232,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\metricflow_time_spine.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\metricflow_time_spine.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     },
     {
       "id": "models/marts/orders.sql",
@@ -242,10 +254,11 @@
       "is_high_velocity": false,
       "hub_score": 0.05194081570533243,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\orders.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\orders.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": false
     },
     {
       "id": "models/marts/orders.yml",
@@ -263,7 +276,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": false
     },
     {
       "id": "models/marts/order_items.sql",
@@ -283,10 +297,11 @@
       "is_high_velocity": false,
       "hub_score": 0.07134734583369665,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\order_items.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\order_items.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": false
     },
     {
       "id": "models/marts/order_items.yml",
@@ -304,7 +319,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": false
     },
     {
       "id": "models/marts/products.sql",
@@ -321,10 +337,11 @@
       "is_high_velocity": false,
       "hub_score": 0.03253428557696821,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\products.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\products.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": false
     },
     {
       "id": "models/marts/products.yml",
@@ -342,7 +359,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": "models/marts/supplies.sql",
@@ -359,10 +377,11 @@
       "is_high_velocity": false,
       "hub_score": 0.03253428557696821,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\supplies.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\marts\\supplies.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": false
     },
     {
       "id": "models/marts/supplies.yml",
@@ -380,7 +399,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": "models/staging/stg_customers.sql",
@@ -397,10 +417,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_customers.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_customers.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     },
     {
       "id": "models/staging/stg_customers.yml",
@@ -418,7 +439,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": false
     },
     {
       "id": "models/staging/stg_locations.sql",
@@ -435,10 +457,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_locations.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_locations.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     },
     {
       "id": "models/staging/stg_locations.yml",
@@ -456,7 +479,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": false
     },
     {
       "id": "models/staging/stg_orders.sql",
@@ -473,10 +497,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_orders.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_orders.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     },
     {
       "id": "models/staging/stg_orders.yml",
@@ -494,7 +519,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": false
     },
     {
       "id": "models/staging/stg_order_items.sql",
@@ -511,10 +537,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_order_items.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_order_items.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     },
     {
       "id": "models/staging/stg_order_items.yml",
@@ -532,7 +559,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": false
     },
     {
       "id": "models/staging/stg_products.sql",
@@ -549,10 +577,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_products.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_products.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     },
     {
       "id": "models/staging/stg_products.yml",
@@ -570,7 +599,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": false
     },
     {
       "id": "models/staging/stg_supplies.sql",
@@ -587,10 +617,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_supplies.sql (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\models\\staging\\stg_supplies.sql (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     },
     {
       "id": "models/staging/stg_supplies.yml",
@@ -608,7 +639,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": false
     },
     {
       "id": "models/staging/__sources.yml",
@@ -626,7 +658,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": ".github/workflows/cd_prod.yml",
@@ -644,7 +677,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": ".github/workflows/cd_staging.yml",
@@ -662,7 +696,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": ".github/workflows/ci.yml",
@@ -680,7 +715,8 @@
       "purpose": null,
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": null
+      "domain_cluster": null,
+      "is_dead_code": true
     },
     {
       "id": ".github/workflows/scripts/dbt_cloud_run_job.py",
@@ -703,10 +739,11 @@
       "is_high_velocity": false,
       "hub_score": 0.02283102051278611,
       "metadata": {},
-      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\.github\\workflows\\scripts\\dbt_cloud_run_job.py (models_tried=[models/gemini-2.0-flash, models/gemini-1.5-flash, models/gemini-1.5-pro]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
+      "purpose": "LLM generation failed for stage 'purpose_statement' on C:\\Users\\Ephi\\the-brownfield-cartographer\\jaffle-shop\\.github\\workflows\\scripts\\dbt_cloud_run_job.py (models_tried=[gemini-2.0-flash, gemini-1.5-flash]): 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}",
       "documentation_drift": false,
       "drift_explanation": null,
-      "domain_cluster": "default_domain"
+      "domain_cluster": "default_domain",
+      "is_dead_code": true
     }
   ],
   "links": [

@@ -2,4 +2,22 @@
 
 This report answers the five critical questions for a First Day in Engineering (FDE) assessment.
 
-*No Day-One report available (cold start). Run the Semanticist and re-run the Archivist to populate this section.*
+## Primary Data Ingestion Path
+
+See LLM-generated assessment (integration required).
+
+## 3–5 Critical Output Datasets
+
+See LLM-generated assessment (integration required).
+
+## Blast Radius of Architectural Hubs
+
+See LLM-generated assessment (integration required).
+
+## Where Business Logic is Concentrated
+
+See LLM-generated assessment (integration required).
+
+## Git Velocity Hotspots
+
+See LLM-generated assessment (integration required).
