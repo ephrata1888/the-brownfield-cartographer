@@ -9,15 +9,7 @@
     },
     {
       "type": "table",
-      "id": "orders"
-    },
-    {
-      "type": "table",
-      "id": "customers"
-    },
-    {
-      "type": "table",
-      "id": "stg_customers"
+      "id": "customer_orders_summary"
     },
     {
       "type": "table",
@@ -25,7 +17,15 @@
     },
     {
       "type": "table",
-      "id": "customer_orders_summary"
+      "id": "stg_customers"
+    },
+    {
+      "type": "table",
+      "id": "customers"
+    },
+    {
+      "type": "table",
+      "id": "orders"
     },
     {
       "type": "file",
@@ -45,11 +45,11 @@
     },
     {
       "type": "table",
-      "id": "cast_to_date"
+      "id": "days"
     },
     {
       "type": "table",
-      "id": "days"
+      "id": "cast_to_date"
     },
     {
       "type": "file",
@@ -57,7 +57,7 @@
     },
     {
       "type": "table",
-      "id": "stg_orders"
+      "id": "compute_booleans"
     },
     {
       "type": "table",
@@ -65,7 +65,7 @@
     },
     {
       "type": "table",
-      "id": "order_items"
+      "id": "stg_orders"
     },
     {
       "type": "table",
@@ -73,7 +73,7 @@
     },
     {
       "type": "table",
-      "id": "compute_booleans"
+      "id": "order_items"
     },
     {
       "type": "file",
@@ -81,15 +81,15 @@
     },
     {
       "type": "table",
+      "id": "stg_order_items"
+    },
+    {
+      "type": "table",
       "id": "stg_supplies"
     },
     {
       "type": "table",
-      "id": "products"
-    },
-    {
-      "type": "table",
-      "id": "stg_order_items"
+      "id": "stg_products"
     },
     {
       "type": "table",
@@ -97,11 +97,11 @@
     },
     {
       "type": "table",
-      "id": "order_supplies_summary"
+      "id": "products"
     },
     {
       "type": "table",
-      "id": "stg_products"
+      "id": "order_supplies_summary"
     },
     {
       "type": "file",
@@ -117,15 +117,11 @@
     },
     {
       "type": "dataset",
-      "id": "source:ecom.raw_orders"
-    },
-    {
-      "type": "dataset",
       "id": "source:ecom.raw_supplies"
     },
     {
       "type": "dataset",
-      "id": "source:ecom.raw_items"
+      "id": "source:ecom.raw_products"
     },
     {
       "type": "dataset",
@@ -133,14 +129,43 @@
     },
     {
       "type": "dataset",
-      "id": "source:ecom.raw_stores"
+      "id": "source:ecom.raw_orders"
     },
     {
       "type": "dataset",
-      "id": "source:ecom.raw_products"
+      "id": "source:ecom.raw_items"
+    },
+    {
+      "type": "dataset",
+      "id": "source:ecom.raw_stores"
     }
   ],
   "links": [
+    {
+      "kind": "sql_dep",
+      "source": "customer_orders_summary",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "joined",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "joined",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "stg_customers",
+      "target": "models/marts/customers.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "customers",
+      "target": "models/marts/customers.sql"
+    },
     {
       "kind": "sql_dep",
       "source": "orders",
@@ -155,31 +180,6 @@
       "kind": "sql_dep",
       "source": "orders",
       "target": "models/marts/order_items.sql"
-    },
-    {
-      "kind": "sql_dep",
-      "source": "customers",
-      "target": "models/marts/customers.sql"
-    },
-    {
-      "kind": "sql_dep",
-      "source": "stg_customers",
-      "target": "models/marts/customers.sql"
-    },
-    {
-      "kind": "sql_dep",
-      "source": "joined",
-      "target": "models/marts/customers.sql"
-    },
-    {
-      "kind": "sql_dep",
-      "source": "joined",
-      "target": "models/marts/order_items.sql"
-    },
-    {
-      "kind": "sql_dep",
-      "source": "customer_orders_summary",
-      "target": "models/marts/customers.sql"
     },
     {
       "kind": "sql_dep",
@@ -193,23 +193,18 @@
     },
     {
       "kind": "sql_dep",
-      "source": "cast_to_date",
-      "target": "models/marts/metricflow_time_spine.sql"
-    },
-    {
-      "kind": "sql_dep",
       "source": "days",
       "target": "models/marts/metricflow_time_spine.sql"
     },
     {
       "kind": "sql_dep",
-      "source": "stg_orders",
-      "target": "models/marts/orders.sql"
+      "source": "cast_to_date",
+      "target": "models/marts/metricflow_time_spine.sql"
     },
     {
       "kind": "sql_dep",
-      "source": "stg_orders",
-      "target": "models/marts/order_items.sql"
+      "source": "compute_booleans",
+      "target": "models/marts/orders.sql"
     },
     {
       "kind": "sql_dep",
@@ -218,12 +213,12 @@
     },
     {
       "kind": "sql_dep",
-      "source": "order_items",
+      "source": "stg_orders",
       "target": "models/marts/orders.sql"
     },
     {
       "kind": "sql_dep",
-      "source": "order_items",
+      "source": "stg_orders",
       "target": "models/marts/order_items.sql"
     },
     {
@@ -233,28 +228,13 @@
     },
     {
       "kind": "sql_dep",
-      "source": "compute_booleans",
+      "source": "order_items",
       "target": "models/marts/orders.sql"
     },
     {
       "kind": "sql_dep",
-      "source": "stg_supplies",
+      "source": "order_items",
       "target": "models/marts/order_items.sql"
-    },
-    {
-      "kind": "sql_dep",
-      "source": "stg_supplies",
-      "target": "models/marts/supplies.sql"
-    },
-    {
-      "kind": "sql_dep",
-      "source": "products",
-      "target": "models/marts/order_items.sql"
-    },
-    {
-      "kind": "sql_dep",
-      "source": "products",
-      "target": "models/marts/products.sql"
     },
     {
       "kind": "sql_dep",
@@ -263,18 +243,13 @@
     },
     {
       "kind": "sql_dep",
-      "source": "supplies",
+      "source": "stg_supplies",
       "target": "models/marts/order_items.sql"
     },
     {
       "kind": "sql_dep",
-      "source": "supplies",
+      "source": "stg_supplies",
       "target": "models/marts/supplies.sql"
-    },
-    {
-      "kind": "sql_dep",
-      "source": "order_supplies_summary",
-      "target": "models/marts/order_items.sql"
     },
     {
       "kind": "sql_dep",
@@ -287,9 +262,29 @@
       "target": "models/marts/products.sql"
     },
     {
-      "kind": "config",
-      "source": "source:ecom",
-      "target": "source:ecom.raw_orders"
+      "kind": "sql_dep",
+      "source": "supplies",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "supplies",
+      "target": "models/marts/supplies.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "products",
+      "target": "models/marts/order_items.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "products",
+      "target": "models/marts/products.sql"
+    },
+    {
+      "kind": "sql_dep",
+      "source": "order_supplies_summary",
+      "target": "models/marts/order_items.sql"
     },
     {
       "kind": "config",
@@ -299,7 +294,7 @@
     {
       "kind": "config",
       "source": "source:ecom",
-      "target": "source:ecom.raw_items"
+      "target": "source:ecom.raw_products"
     },
     {
       "kind": "config",
@@ -309,12 +304,17 @@
     {
       "kind": "config",
       "source": "source:ecom",
-      "target": "source:ecom.raw_stores"
+      "target": "source:ecom.raw_orders"
     },
     {
       "kind": "config",
       "source": "source:ecom",
-      "target": "source:ecom.raw_products"
+      "target": "source:ecom.raw_items"
+    },
+    {
+      "kind": "config",
+      "source": "source:ecom",
+      "target": "source:ecom.raw_stores"
     }
   ]
 }
